@@ -16,7 +16,10 @@ import org.jeecgframework.tag.core.easyui.TagUtil;
 import org.jeecgframework.web.system.pojo.base.TSTimeTaskEntity;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.web.system.service.TimeTaskServiceI;
+import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,7 +96,7 @@ public class TimeTaskController extends BaseController {
 
 
 	/**
-	 * 添加定时任务管理
+	 * 添加定时任务管理(这个有在用吗)
 	 * 
 	 * @param ids
 	 * @return
@@ -103,13 +106,10 @@ public class TimeTaskController extends BaseController {
 	public AjaxJson save(TSTimeTaskEntity timeTask, HttpServletRequest request) {
 		String message = null;
 		AjaxJson j = new AjaxJson();
-		CronTrigger trigger = new CronTrigger();
-		try {
-			trigger.setCronExpression(timeTask.getCronExpression());
-		} catch (ParseException e) {
-			j.setMsg("Cron表达式错误");
-			return j;
-		}
+		CronScheduleBuilder scheduleBuilder=CronScheduleBuilder.cronSchedule(timeTask.getCronExpression());
+		
+		Trigger trigger = TriggerBuilder.newTrigger().withSchedule(scheduleBuilder).build();
+		//还有待实现
 		if (StringUtil.isNotEmpty(timeTask.getId())) {
 			message = "定时任务管理更新成功";
 			TSTimeTaskEntity t = timeTaskService.get(TSTimeTaskEntity.class, timeTask.getId());

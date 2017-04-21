@@ -14,10 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
 
-    <title><t:mutiLang langKey="jeect.platform"/></title>
-
-    <meta name="keywords" content="JEECG,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="JEECG是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+   <%--  <title><t:mutiLang langKey="jeect.platform"/></title> --%>
+    <title>建材管理系统</title>
 
     <link rel="shortcut icon" href="images/favicon.ico">
     <link href="plug-in-ui/hplus/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
@@ -61,7 +59,6 @@
                             <li><a href="javascript:openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')"><t:mutiLang langKey="common.ssms.getSysInfos"/></a></li>
                             <li><a href="javascript:add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,250)"><t:mutiLang langKey="common.my.style"/></a></li>
                             <li><a href="javascript:clearLocalstorage()"><t:mutiLang langKey="common.clear.localstorage"/></a></li>
-                            <li><a href="http://yun.jeecg.org" target="_blank">云应用中心</li>
                             <li class="divider"></li>
                             <li><a href="javascript:logout()">注销</a></li>
                         </ul>
@@ -83,7 +80,7 @@
                 <div class="navbar-header" style="height: 60px;"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                         <div class="form-group">
-                            <input type="text" placeholder="欢迎使用Jeecg快速开发平台 …" class="form-control" name="top-search" id="top-search">
+                            <input type="text" placeholder="欢迎使用建材管理系统... class="form-control" name="top-search" id="top-search">
                         </div>
                     </form>
                 </div>
@@ -153,7 +150,7 @@
                             <li><a href="javascript:openwindow('<t:mutiLang langKey="common.ssms.getSysInfos"/>','tSSmsController.do?getSysInfos')"><t:mutiLang langKey="common.ssms.getSysInfos"/></a></li>
                             <li><a href="javascript:add('<t:mutiLang langKey="common.change.style"/>','userController.do?changestyle','',550,250)"><t:mutiLang langKey="common.my.style"/></a></li>
                             <li><a href="javascript:clearLocalstorage()"><t:mutiLang langKey="common.clear.localstorage"/></a></li>
-                            <li><a href="javascript:toJeecgYun()">云应用中心</a></li>
+                            <!-- <li><a href="javascript:toJeecgYun()">云应用中心</a></li> -->
                             <!-- <li><a href="http://yun.jeecg.org" target="_blank">云应用中心</li> -->
                            <!--  <li class="divider"></li>
                             <li><a href="javascript:logout()">注销</a></li> -->

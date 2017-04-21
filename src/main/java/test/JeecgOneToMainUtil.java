@@ -23,41 +23,27 @@ public class JeecgOneToMainUtil {
 	public static void main(String[] args) {
 		//第一步：设置主表配置
 		CodeParamEntity codeParamEntityIn = new CodeParamEntity();
-		codeParamEntityIn.setTableName("jform_order_main");//表名
-		codeParamEntityIn.setEntityName("TestOrderMain");	 //实体名
-		codeParamEntityIn.setEntityPackage("test");	 //包名
-		codeParamEntityIn.setFtlDescription("订单");	 //描述
+		codeParamEntityIn.setTableName("sys_activiti_group");//表名
+		codeParamEntityIn.setEntityName("ActivitiGroup");	 //实体名
+		codeParamEntityIn.setEntityPackage("activiti");	 //包名
+		codeParamEntityIn.setFtlDescription("工作流程组");	 //描述
 		
 		//第二步：设置子表集合配置
 		List<SubTableEntity> subTabParamIn = new ArrayList<SubTableEntity>();
 		//[1].子表一
 		SubTableEntity po = new SubTableEntity();
-		po.setTableName("jform_order_customer");//表名
-		po.setEntityName("TestOrderCustom");	    //实体名
-		po.setEntityPackage("test");	        //包名
-		po.setFtlDescription("客户明细");       //描述
+		po.setTableName("sys_activiti_group_user");//表名
+		po.setEntityName("ActivitiGroupUser");	    //实体名
+		po.setEntityPackage("activiti");	        //包名
+		po.setFtlDescription("工作流程组和人员关系对应model");       //描述
 		//子表外键参数配置
 		/*说明: 
 		 * a) 子表引用主表主键ID作为外键，外键字段必须以_ID结尾;
 		 * b) 主表和子表的外键字段名字，必须相同（除主键ID外）;
 		 * c) 多个外键字段，采用逗号分隔;
 		*/
-		po.setForeignKeys(new String[]{"fk_id"});
+		po.setForeignKeys(new String[]{"group_id"});
 		subTabParamIn.add(po);
-		//[2].子表二
-		SubTableEntity po2 = new SubTableEntity();
-		po2.setTableName("jform_order_ticket");		//表名
-		po2.setEntityName("TestOrderTicket");			//实体名
-		po2.setEntityPackage("test"); 				//包名
-		po2.setFtlDescription("产品明细");			//描述
-		//子表外键参数配置
-		/*说明: 
-		 * a) 子表引用主表主键ID作为外键，外键字段必须以_ID结尾;
-		 * b) 主表和子表的外键字段名字，必须相同（除主键ID外）;
-		 * c) 多个外键字段，采用逗号分隔;
-		*/
-		po2.setForeignKeys(new String[]{"fck_id"});
-		subTabParamIn.add(po2);
 		codeParamEntityIn.setSubTabParam(subTabParamIn);
 		
 		//第三步：一对多(父子表)数据模型,代码生成

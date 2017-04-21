@@ -44,7 +44,7 @@
     <logger name="org.springframework" level="DEBUG" />
     <logger name="org.apache.cxf.jaxb" level="ERROR" />
     
-	<root level="INFO">
+	<root level="DEBUG">
         <appender-ref ref="CONSOLE" />
 		<appender-ref ref="info" />
 		<appender-ref ref="error" />

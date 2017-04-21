@@ -17,10 +17,12 @@ import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
+import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
+import org.quartz.TriggerKey;
 import org.springframework.stereotype.Service;
 
 /**
@@ -52,10 +54,10 @@ public class DynamicTask {
 			CronTrigger trigger = (CronTrigger) getTrigger(triggerName,
 					Scheduler.DEFAULT_GROUP);
 			if(start){
-				schedulerFactory.resumeTrigger(trigger.getName(), trigger.getGroup());
+				schedulerFactory.resumeTrigger(trigger.getKey() );
 				logger.info("trigger the start successfully!!");
 			}else{
-				schedulerFactory.pauseTrigger(trigger.getName(), trigger.getGroup());
+				schedulerFactory.pauseTrigger(trigger.getKey());
 				logger.info("trigger the pause successfully!!");
 			}
 			return true;
@@ -86,16 +88,13 @@ public class DynamicTask {
 				logger.info("cronExpression is same with the running Schedule , no need to update.");
 				return true;
 			}
-			trigger.setCronExpression(cronExpression);
-			schedulerFactory.rescheduleJob(trigger.getName(), trigger.getGroup(),
+			CronScheduleBuilder scheduleBuilder=CronScheduleBuilder.cronSchedule(cronExpression);
+			trigger.getTriggerBuilder().withSchedule(scheduleBuilder);
+			schedulerFactory.rescheduleJob(trigger.getKey(),
 					trigger);
 			updateSpringMvcTaskXML(trigger,cronExpression);
 			logger.info("Update the cronExpression successfully!!");
 			return true;
-		} catch (ParseException e) {
-			logger.error("The new cronExpression - " + cronExpression
-					+ " not conform to the standard. " + e);
-			return false;
 		} catch (SchedulerException e) {
 			logger.error("Fail to reschedule. " + e);
 			return false;
@@ -104,6 +103,7 @@ public class DynamicTask {
 
 	/**
 	 * 获取触发器
+	 * @param <T>
 	 * 
 	 * @param triggerName
 	 *            触发器名字
@@ -111,7 +111,7 @@ public class DynamicTask {
 	 *            触发器组名字
 	 * @return 对应Trigger
 	 */
-	private Trigger getTrigger(String triggerName, String groupName) {
+	private <T> Trigger getTrigger(String triggerName, String groupName) {
 		Trigger trigger = null;
 		if (StringUtils.isBlank(groupName)) {
 			logger.warn("Schedule Job Group is empty!");
@@ -122,7 +122,7 @@ public class DynamicTask {
 			return null;
 		}
 		try {
-			trigger = schedulerFactory.getTrigger(triggerName, groupName);
+			trigger = schedulerFactory.getTrigger(new TriggerKey(triggerName, groupName));
 		} catch (SchedulerException e) {
 			logger.warn("Fail to get the trigger (triggerName: " + triggerName
 					+ ", groupName : " + groupName + ")");
@@ -156,7 +156,7 @@ public class DynamicTask {
 		List<Element> beans = root.elements();
 		for (Element bean : beans) {
 			if(bean.attribute("id")!=null&&
-					bean.attribute("id").getValue().equals(trigger.getName())){
+					bean.attribute("id").getValue().equals(trigger.getKey().getName())){
 				beans = bean.elements();
 				for (Element temp : beans) {
 					if(temp.attribute("name")!=null&&
