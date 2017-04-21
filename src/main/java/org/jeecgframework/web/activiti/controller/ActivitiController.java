@@ -29,7 +29,6 @@ import org.jeecgframework.core.common.controller.BaseController;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.web.activiti.util.HistoryProcessInstanceDiagramCmd;
-import org.jeecgframework.web.demo.controller.test.DemoController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +47,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/activitiController")
 public class ActivitiController extends BaseController{
 
-	private static final Logger logger = Logger.getLogger(DemoController.class);
+	private static final Logger logger = Logger.getLogger(ActivitiController.class);
 	
 	@Autowired
 	protected RepositoryService repositoryService;
@@ -180,9 +179,6 @@ public class ActivitiController extends BaseController{
 	
 	/**
 	 * easyui 流程历史页面
-	 * @param request
-	 * @param response
-	 * @param dataGrid
 	 */
 
 	@RequestMapping(params = "viewProcessInstanceHistory")
@@ -266,9 +262,6 @@ public class ActivitiController extends BaseController{
 	
 	/**
 	 * easyui 待领任务页面
-	 * @param request
-	 * @param response
-	 * @param dataGrid
 	 */
 	@RequestMapping(params = "waitingClaimTask")
 	public ModelAndView waitingClaimTask() {
@@ -301,9 +294,6 @@ public class ActivitiController extends BaseController{
 	
 	/**
 	 * easyui 待办任务页面
-	 * @param request
-	 * @param response
-	 * @param dataGrid
 	 */
 	@RequestMapping(params = "claimedTask")
 	public ModelAndView claimedTask() {
@@ -336,9 +326,6 @@ public class ActivitiController extends BaseController{
 	
 	/**
 	 * easyui 已办任务页面
-	 * @param request
-	 * @param response
-	 * @param dataGrid
 	 */
 	@RequestMapping(params = "finishedTask")
 	public ModelAndView finishedTask() {

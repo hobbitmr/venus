@@ -28,6 +28,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="activiti-lib-5.22" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.jeecgframework:codegenerate:3.6.1-SNAPSHOT" level="project" />
